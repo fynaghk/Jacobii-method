@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 
+//elementler matris seklinde yigilir
+
 public class Main {
 
     public static final int MAX_ITERATIONS = 100;
@@ -35,6 +37,7 @@ public class Main {
 
             return true;
         }
+        // dioqonal usulu yoxlanilir
 
         for (int i = 0; i < n; i++) {
             if (V[i]) continue;
@@ -44,7 +47,7 @@ public class Main {
             for (int j = 0; j < n; j++)
                 sum += Math.abs(M[i][j]);
 
-            if (2 * Math.abs(M[i][r]) > sum) { // diagonally dominant?
+            if (2 * Math.abs(M[i][r]) > sum) { 
                 V[i] = true;
                 R[r] = i;
 
@@ -57,6 +60,8 @@ public class Main {
 
         return false;
     }
+
+    // sert dogrudursa massiv yigilir
 
     public boolean makeDominant()
     {
@@ -73,9 +78,11 @@ public class Main {
         int iterations = 0;
         int n = M.length;
         double epsilon = 1e-15;
-        double[] X = new double[n]; // Approximations
-        double[] P = new double[n]; // Prev
+        double[] X = new double[n]; //son element
+        double[] P = new double[n]; //evvelki element
         Arrays.fill(X, 0);
+
+        // iterasialar hesablanilir
 
         while (true) {
             for (int i = 0; i < n; i++) {
@@ -85,7 +92,6 @@ public class Main {
                     if (j != i)
                         sum -= M[i][j] * X[j];
 
-                // Update x_i to use in the next row calculation
                 X[i] = 1/M[i][i] * sum;
             }
 
@@ -106,6 +112,9 @@ public class Main {
             P = (double[])X.clone();
         }
     }
+
+
+// funksiyalar maine yigilir
 
     public static void main(String[] args) throws IOException
     {
